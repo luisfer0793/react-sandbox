@@ -3,7 +3,7 @@ export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     fontFamily: {
-      sans: ['"Nunito Sans"', '"sans-serif"'],
+      sans: ['"Nunito Sans"', "system-ui", "sans-serif"],
     },
     extend: {},
   },
