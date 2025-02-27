@@ -1,28 +1,19 @@
 import { Link } from "@tanstack/react-router";
+import { Anchor, Box, Container, Group } from "@mantine/core";
 
 export const Header = () => {
   return (
-    <nav className="bg-cyan-800 text-white">
-      <ul className="p-5 list-none flex gap-x-4">
-        <li>
-          <Link
-            to="/dashboard"
-            className="text-[15px]"
-            activeProps={{ className: "text-orange-300" }}
-          >
+    <Box component="nav" bg="gray.8" c="white" py="md">
+      <Container fluid>
+        <Group>
+          <Anchor fz={15} c="currentColor" to="/dashboard" component={Link}>
             Dashboard
-          </Link>
-        </li>
-        <li>
-          <Link
-            to="/users"
-            className="text-[15px]"
-            activeProps={{ className: "text-orange-300" }}
-          >
+          </Anchor>
+          <Anchor fz={15} c="currentColor" to="/users" component={Link}>
             Users
-          </Link>
-        </li>
-      </ul>
-    </nav>
+          </Anchor>
+        </Group>
+      </Container>
+    </Box>
   );
 };

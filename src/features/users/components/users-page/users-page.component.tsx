@@ -1,13 +1,16 @@
-import { useSuspenseQuery } from "@tanstack/react-query";
-import { getUsersQuery } from "@/features/users/services/get-users.service";
+import { Container, Stack, Title } from "@mantine/core";
+import { Route } from "@/routes/users";
+import { UserList } from "@/features/users/components/user-list/user-list.component";
 
 export const UsersPage = () => {
-  const { data } = useSuspenseQuery(getUsersQuery);
+  const { users } = Route.useLoaderData();
 
   return (
-    <>
-      <h1 className="text-3xl font-bold pb-4">Users</h1>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
-    </>
+    <Container fluid py="md">
+      <Stack>
+        <Title ta="center">Users Page</Title>
+        <UserList users={users} />
+      </Stack>
+    </Container>
   );
 };

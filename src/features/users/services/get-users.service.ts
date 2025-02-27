@@ -1,5 +1,15 @@
 import { queryOptions } from "@tanstack/react-query";
-import { User } from "@/features/users/types/user.type";
+import { UnparsedUser } from "@/features/users/types/user.type";
+
+type ServiceResponse = {
+  info: {
+    page: number;
+    results: number;
+    seed: string;
+    version: string;
+  };
+  results: UnparsedUser[];
+};
 
 export const getUsersQuery = queryOptions({
   queryKey: ["USERS: GET_ALL"],
@@ -13,13 +23,3 @@ export const getUsersQuery = queryOptions({
     }
   },
 });
-
-type ServiceResponse = {
-  info: {
-    page: number;
-    results: number;
-    seed: string;
-    version: string;
-  };
-  results: User[];
-};

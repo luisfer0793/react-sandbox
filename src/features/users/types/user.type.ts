@@ -1,4 +1,4 @@
-export type User = {
+export type UnparsedUser = {
   gender: string;
   name: {
     title: string;
@@ -54,3 +54,5 @@ export type User = {
   };
   nat: string;
 };
+
+export type User = Omit<UnparsedUser, "id"> & { id: string };
