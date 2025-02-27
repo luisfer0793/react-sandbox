@@ -1,7 +1,17 @@
 import { useState } from "react";
 import { Box } from "@mantine/core";
 import { arrayMove, SortableContext } from "@dnd-kit/sortable";
-import { closestCenter, DndContext, DragEndEvent } from "@dnd-kit/core";
+import {
+  closestCenter,
+  DndContext,
+  DragEndEvent,
+  KeyboardSensor,
+  MouseSensor,
+  PointerSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
 import { User } from "@/features/users/types/user.type";
 import { UserCard } from "@/features/users/components/user-card/user-card.component";
 import classes from "./user-list.module.css";
@@ -19,11 +29,28 @@ export const UserList = ({ users }: { users: User[] }) => {
         return arrayMove(users, oldIndex, newIndex);
       });
     }
-    console.log("Event", event);
+    console.log("Drag end event", event);
   };
+
+  const pointerSensor = useSensor(PointerSensor, {
+    activationConstraint: {
+      distance: 0.01,
+    },
+  });
+  const mouseSensor = useSensor(MouseSensor);
+  const touchSensor = useSensor(TouchSensor);
+  const keyboardSensor = useSensor(KeyboardSensor);
+
+  const sensors = useSensors(
+    mouseSensor,
+    touchSensor,
+    keyboardSensor,
+    pointerSensor,
+  );
 
   return (
     <DndContext
+      sensors={sensors}
       collisionDetection={closestCenter}
       onDragEnd={onDragCardEndHandler}
     >
